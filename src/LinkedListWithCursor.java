@@ -1,4 +1,5 @@
 import java.util.Collection;
+import java.util.NoSuchElementException;
 
 public class LinkedListWithCursor<T> {
     //Importante: No cambiar ni los nombres ni la visibilidad
@@ -16,38 +17,68 @@ public class LinkedListWithCursor<T> {
 
 
     public LinkedListWithCursor(Collection<T> col, int index) {
-        // TODO Ejercicio 1
-        throw new UnsupportedOperationException("Ejercicio 1: por implementar");
+
+        if(index < 0 || index > col.size()){
+            throw new IndexOutOfBoundsException();
+        }
+
+        for(T x : col){
+            left = new Node<>(x,left);
+            sizeLeft ++;
+        }
+
+        for(int i = 0; i< col.size()-index; i++){
+            Node<T> n = left;
+            left = n.next;
+            n.next = right;
+            right = n;
+
+            sizeLeft--;
+            sizeRight++;
+        }
     }
 
 
     public int index() {
-        // TODO Ejercicio 2
-        throw new UnsupportedOperationException("Ejercicio 2: por implementar");
+        return sizeLeft;
     }
 
-
     public int size() {
-        // TODO Ejercicio 3
-        throw new UnsupportedOperationException("Ejercicio 3: por implementar");
+        return sizeLeft + sizeRight;
     }
 
 
     public T current() {
-        // TODO Ejercicio 4
-        throw new UnsupportedOperationException("Ejercicio 4: por implementar");
+        if (right == null) {
+            return null;
+        }
+
+        return right.data;
     }
 
 
     public void add(T item) {
-        // TODO Ejercicio 5
-        throw new UnsupportedOperationException("Ejercicio 5: por implementar");
+        Node<T> nuevo = new Node<>(item,left);
+        left  = nuevo;
+
+        sizeLeft++;
+
     }
 
 
     public T remove() {
-        // TODO Ejercicio 6
-        throw new UnsupportedOperationException("Ejercicio 6: por implementar");
+
+        if(right == null){
+            throw new NoSuchElementException();
+        }
+
+        T dato = right.data;
+
+        right = right.next;
+        sizeRight --;
+
+        return dato;
+
     }
 
 
