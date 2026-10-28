@@ -82,10 +82,7 @@ public class LinkedListWithCursor<T> {
     }
 
 
-    public T next() {
-        // TODO Ejercicio 7
-        throw new UnsupportedOperationException("Ejercicio 7: por implementar");
-    }
+    public T next() {}
 
 
     public T previous() {
